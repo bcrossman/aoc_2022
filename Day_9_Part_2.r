@@ -10,7 +10,7 @@ moves <-
            sep = " ", 
            convert = T) 
 
-number_of_knots <- 1
+number_of_knots <- 9
 ##initialize
 knot_positions <- list()
 for(i in 0:number_of_knots){
@@ -39,7 +39,7 @@ update_tail <- function(h_x, h_y, t_x, t_y){
 output <- list()
 count <- 0
 for(i in 1:nrow(moves)){
-  # print(i)
+  print(i)
   if(moves$move[i]%in% c("L", "R")){
     for(j in seq(moves$move_num[i])){
       x_move <- if_else(moves$move[i] == "L",-1,1)
