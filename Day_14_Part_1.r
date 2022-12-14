@@ -1,4 +1,3 @@
-library(unglue)
 library(tidyverse)
 
 file <- "./Day_14/Part_1/input.txt"
