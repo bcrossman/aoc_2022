@@ -17,7 +17,7 @@ data <-
 floor <- (max(c(data$start_y,data$end_y)))+2
 data <- 
   data %>% 
-  bind_rows(tibble("start_x"=0, "start_y"=floor, "end_x"=1000, end_y = floor)) %>% 
+  bind_rows(tibble("start_x"=300, "start_y"=floor, "end_x"=800, end_y = floor)) %>% 
   rowwise() %>% 
   mutate(points = list(paste(seq(start_x,end_x),seq(start_y,end_y), sep = ","))) %>% 
   ungroup()
@@ -30,17 +30,36 @@ playing_field <-
   mutate(key = paste(x,y, sep=",")) %>% 
   mutate(filled = key %in% rocks) %>% 
   filter(filled) %>% 
-  select(-key)
+  select(-key) %>% 
+  ungroup() %>% 
+  as.data.frame()
 
 full <- FALSE
 count <- 0
 while(!full){
   count <- count+1
-  # if(count==93){break}
-  if(count%%500==0){print(count)}
+  # if(count==500){break}
+  if(count%%500==0){
+    print(count)
+    # playing_field <-
+    #   playing_field %>%
+    #   ungroup() %>%
+    #   # filter(y>147&y<153) %>%
+    #   # filter(x>517&x<523) %>%
+    #   group_by(y) %>% 
+    #   arrange(x) %>%
+    #   mutate(surrounded_side = abs(lead(x = x, n = 3, default = 9999)-lag(x = x,n = 3, -9999))==6) %>%
+    #   group_by(x) %>% 
+    #   arrange(y) %>%
+    #   mutate(surrounded_up_down = abs(lead(x = y, n = 3, default = 9999)-lag(x = y, n = 3, -9999))==6) %>%
+    #   filter(!(surrounded_side&surrounded_up_down)) %>% 
+    #   as.data.frame()
+    print(paste("size:",nrow(playing_field)))
+   }
   still_moving <- TRUE
   current_sand_x <- 500
   current_sand_y <- 0
+  
   while(still_moving){
     
     check_down <-  length(playing_field$filled[(playing_field$x==current_sand_x)&(playing_field$y==(current_sand_y+1))])==1
