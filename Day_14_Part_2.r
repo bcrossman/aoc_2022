@@ -41,19 +41,6 @@ while(!full){
   # if(count==500){break}
   if(count%%500==0){
     print(count)
-    # playing_field <-
-    #   playing_field %>%
-    #   ungroup() %>%
-    #   # filter(y>147&y<153) %>%
-    #   # filter(x>517&x<523) %>%
-    #   group_by(y) %>% 
-    #   arrange(x) %>%
-    #   mutate(surrounded_side = abs(lead(x = x, n = 3, default = 9999)-lag(x = x,n = 3, -9999))==6) %>%
-    #   group_by(x) %>% 
-    #   arrange(y) %>%
-    #   mutate(surrounded_up_down = abs(lead(x = y, n = 3, default = 9999)-lag(x = y, n = 3, -9999))==6) %>%
-    #   filter(!(surrounded_side&surrounded_up_down)) %>% 
-    #   as.data.frame()
     print(paste("size:",nrow(playing_field)))
    }
   still_moving <- TRUE
